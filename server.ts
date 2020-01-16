@@ -1,5 +1,6 @@
 import express from "express";
-import {apiGetPosts,apiGetPostDetail} from "./api/posts/apiGetPosts"
+import { apiGetPosts } from "./api/posts/apiGetPosts"
+import { apiGetPostDetail } from './api/posts/apiGetpostDetail'
 const app = express();
 
 const port = process.env.PORT || 8091;
@@ -14,7 +15,7 @@ app.get("/todos",(req, res) => {
 })
 
 app.get("/posts", apiGetPosts);
-app.get("/post/:id", apiGetPostDetail);
+app.get("/posts/:id", apiGetPostDetail);
 
 
 app.listen(port, () => {

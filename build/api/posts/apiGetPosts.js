@@ -7,11 +7,3 @@ exports.apiGetPosts = (req, res, next) => {
     // 给数据定义
     new postSummary_1.PostSummary(item)));
 };
-exports.apiGetPostDetail = (req, res, next) => {
-    data_1.DataStore.posts.map((item) => {
-        if (item.id == req.params.id) {
-            // 给数据定义
-            res.json(new postSummary_1.PostSummary(item));
-        }
-    });
-};

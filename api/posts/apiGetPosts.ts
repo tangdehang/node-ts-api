@@ -10,14 +10,3 @@ export const apiGetPosts: RequestHandler = (req, res, next) => {
         new PostSummary(item)
     ));
 }
-
-export const apiGetPostDetail: RequestHandler = (req, res, next) => {
-
-    DataStore.posts.map((item: any) => {
-
-        if(item.id == req.params.id) {
-            // 给数据定义
-            res.json(new PostSummary(item));
-        }
-    })
-}
