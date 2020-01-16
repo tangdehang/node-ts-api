@@ -14,9 +14,9 @@ app.get("/todos",(req, res) => {
 })
 
 app.get("/posts", apiGetPosts);
-app.get("/posts/:id", apiGetPostDetail);
+app.get("/post/:id", apiGetPostDetail);
 
 
 app.listen(port, () => {
-    console.log(`http://localhost:${port} 启动成功了`);
+    console.log(`http://127.0.0.1:${port} 启动成功了`);
 })
