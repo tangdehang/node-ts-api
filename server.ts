@@ -14,7 +14,7 @@ app.get("/todos",(req, res) => {
 })
 
 app.get("/posts", apiGetPosts);
-app.get("/post/:id", apiGetPostDetail);
+app.get("/posts/:id", apiGetPostDetail);
 
 
 app.listen(port, () => {
