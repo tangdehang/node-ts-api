@@ -3,17 +3,19 @@
 	<head>
 		<meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title>通知</title>
+		<title>签到</title>
 		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
 		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<!-- <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script> -->
 	</head>
 	<body>
-		<div id="app">
-			<form action="" method="post">
-				<label for="">账号</label><input type="text" v-modul.trim="user">
-				<label for="">密码</label><input type="text" v-modul.trim="pass">
-				<button id="login">登陆</button>
-			</form>
+		<div id="app" align="center">
+			
+				<p><label for="">账号</label><input type="text" v-model.trim="user"></p>
+				<p><label for="">口号</label><input type="text" v-model.trim="pass"></p>
+				<p><button @click=login>登陆</button></p>
+				<p><button @click="dk">签到</button></p>
+			
 		</div>
 	</body>
 	<script>
@@ -37,32 +39,51 @@
 			let vm = new Vue({
 				el: "#app",
 				data: {
-					url: "http://10.130.0.37:9000/jplat-mobile-oa-client/",
+					url: "http://221.237.162.142:13321/jplat-mobile-oa-client/",
 					login_url: "home/login", // 登陆
 					dk_url: "checkwork/attendance", // 打卡
-					user: "000551",
-					pass: "tang1992."
+					//user: "000551",
+					user: "000549",
+					pass: "jwwl20170220",
+					token: ""
 				},
-				method: {
+				methods: {
+
 					login() {
-						console.log("====")
-						axios.post(this.url + login_url,{
-							userSn: this.user,
-							password: this.pass,
-							// clientId: ""
+						
+						axios.get(this.url + this.login_url,{
+							params:{
+								userSn: this.user,
+								password: this.pass,
+							}
 						})
 						.then((res) => {
+							
+							this.token = res.data.token;
+							alert(this.token);
+						})
+						.catch((err) => {
+							alert(err)
+							console.log(err);
+						})
+					},
+					dk(){
+						
+						axios.get(this.url + this.dk_url,{
+							header:{
+								Authorization: this.token
+							}
+						})
+						.then((res) => {
+							alert(res.data.statusCode);
 							console.log(res);
 						})
 						.catch((err) => {
+							alert(err)
 							console.log(err);
 						})
 					}
 				}
-			})
-
-			document.getElementById("login").addEventListener("click", ()=>{
-				vm.login();
 			})
 		} 
 	</script>
