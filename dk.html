@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>通知</title>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<form action="" method="post">
+				<label for="">账号</label><input type="text" v-modul.trim="user">
+				<label for="">密码</label><input type="text" v-modul.trim="pass">
+				<button id="login">登陆</button>
+			</form>
+		</div>
+	</body>
+	<script>
+		/*
+		正式环境
+		http://221.237.162.142:13321
+
+		测试环境
+		http://10.130.0.37:9000
+
+		上下文
+		/jplat-mobile-oa-client/
+
+		登陆 params {userSn, password}
+
+		打卡
+		header：{Authorization, // @deci 貌似没用这个 Content-Type: application/x-www-form-urlencoded  || application/json}
+		*/
+		window.onload=function(){ 
+			
+			let vm = new Vue({
+				el: "#app",
+				data: {
+					url: "http://10.130.0.37:9000/jplat-mobile-oa-client/",
+					login_url: "home/login", // 登陆
+					dk_url: "checkwork/attendance", // 打卡
+					user: "000551",
+					pass: "tang1992."
+				},
+				method: {
+					login() {
+						console.log("====")
+						axios.post(this.url + login_url,{
+							userSn: this.user,
+							password: this.pass,
+							// clientId: ""
+						})
+						.then((res) => {
+							console.log(res);
+						})
+						.catch((err) => {
+							console.log(err);
+						})
+					}
+				}
+			})
+
+			document.getElementById("login").addEventListener("click", ()=>{
+				vm.login();
+			})
+		} 
+	</script>
+</html>
