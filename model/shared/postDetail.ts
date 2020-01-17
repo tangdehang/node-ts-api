@@ -6,10 +6,10 @@ export class PostDetail extends PostSummary {
     currency: string;
     todos: Todo;
 
-    constructor(postData:any, todos: any){
+    constructor(postData:any, todoData: any){
         super(postData);
         this.price = postData.price;
         this.currency = postData.currency;
-        this.todos = todos;
+        this.todos = todoData.map((item: any) => new Todo(item));
     }
 }
