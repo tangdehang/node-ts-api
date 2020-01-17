@@ -8,6 +8,7 @@ const apiGetPosts_1 = require("./api/posts/apiGetPosts");
 const apiGetpostDetail_1 = require("./api/posts/apiGetpostDetail");
 const apiCreatePost_1 = require("./api/posts/apiCreatePost");
 const apiDeletePost_1 = require("./api/posts/apiDeletePost");
+const apiUpdatePost_1 = require("./api/posts/apiUpdatePost");
 const app = express_1.default();
 // POST 请求中间件
 const body_parser_1 = __importDefault(require("body-parser"));
@@ -28,6 +29,8 @@ app.get("/posts/:id", apiGetpostDetail_1.apiGetPostDetail);
 app.post("/posts", apiCreatePost_1.apiCreatePost);
 // 删除
 app.delete("/posts/:id", apiDeletePost_1.apiDeletePost);
+// 更新某条数据
+app.put("/posts/:id", apiUpdatePost_1.apiUpdatePost);
 app.listen(port, () => {
     console.log(`http://127.0.0.1:${port} 启动成功了`);
 });
