@@ -42,8 +42,7 @@
 					url: "http://221.237.162.142:13321/jplat-mobile-oa-client/",
 					login_url: "home/login", // 登陆
 					dk_url: "checkwork/attendance", // 打卡
-					//user: "000551",
-					user: "000549",
+					user: "000",
 					pass: "jwwl20170220",
 					token: ""
 				},
@@ -68,10 +67,10 @@
 						})
 					},
 					dk(){
-						
+						console.log(this.token)
 						axios.get(this.url + this.dk_url,{
-							header:{
-								Authorization: this.token
+							headers:{
+								"Authorization": this.token
 							}
 						})
 						.then((res) => {
