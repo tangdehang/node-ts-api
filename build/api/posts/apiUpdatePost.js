@@ -3,9 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const data_1 = require("../../data/data");
 exports.apiUpdatePost = (req, res, next) => {
     const postIndex = data_1.DataStore.posts.findIndex((item) => item.id == req.params.id);
-    // 获取当前修改的原数据
-    const originaPost = data_1.DataStore.posts[postIndex];
     if (~postIndex) {
+        // 获取当前修改的原数据
+        const originaPost = data_1.DataStore.posts[postIndex];
         const upDatePost = {
             id: req.params.id,
             userId: req.body.userId || originaPost.userId,
@@ -13,6 +13,7 @@ exports.apiUpdatePost = (req, res, next) => {
             body: req.body.body || originaPost.body,
             price: req.body.price || originaPost.price,
             currency: req.body.currency || originaPost.currency,
+            img: originaPost.img,
         };
         // 更新数据
         data_1.DataStore.posts[postIndex] = upDatePost;

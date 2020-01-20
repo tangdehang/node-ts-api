@@ -5,12 +5,12 @@ import { NewPost } from "../../interface/newPost";
 import {RequestHandler} from "express";
 
 export const apiUpdatePost: RequestHandler = (req, res, next) => {
-
+    
     const postIndex = DataStore.posts.findIndex((item: any) => item.id == req.params.id);
-
-    // 获取当前修改的原数据
-    const originaPost = DataStore.posts[postIndex];
     if(~postIndex) {
+        // 获取当前修改的原数据
+        const originaPost: NewPost = DataStore.posts[postIndex];
+
         const upDatePost: NewPost = {
             id:req.params.id,
             userId: req.body.userId || originaPost.userId,
@@ -18,6 +18,7 @@ export const apiUpdatePost: RequestHandler = (req, res, next) => {
             body: req.body.body || originaPost.body,
             price: req.body.price || originaPost.price,
             currency: req.body.currency || originaPost.currency,
+            img: originaPost.img,
         }
 
         // 更新数据

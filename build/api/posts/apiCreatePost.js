@@ -8,7 +8,8 @@ const v4_1 = __importDefault(require("uuid/v4"));
 exports.apiCreatePost = (req, res, next) => {
     const newPost = {
         id: v4_1.default(),
-        ...req.body
+        ...req.body,
+        img: []
     };
     data_1.DataStore.posts.push(newPost);
     res.json(newPost);

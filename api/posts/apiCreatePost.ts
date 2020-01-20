@@ -9,7 +9,8 @@ export const apiCreatePost: RequestHandler = (req, res, next) => {
 
    const newPost: NewPost = {
        id: uuid(),
-       ...req.body
+       ...req.body,
+       img: []
    }
    DataStore.posts.push( newPost );
 

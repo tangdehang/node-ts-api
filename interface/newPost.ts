@@ -5,4 +5,5 @@ export interface NewPost {
     body: string;
     price: number;
     currency: string;
+    img: string[];
 }
