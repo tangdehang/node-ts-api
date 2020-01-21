@@ -1,16 +1,20 @@
 import express from "express";
 import path from "path";
 
+import { CumtomRequesetHandler } from "./interface/express";
+
 import { apiGetPosts } from "./api/posts/apiGetPosts"
 import { apiGetPostDetail } from './api/posts/apiGetpostDetail'
 import { apiCreatePost } from './api/posts/apiCreatePost'
 import { apiDeletePost } from './api/posts/apiDeletePost'
 import { apiUpdatePost } from './api/posts/apiUpdatePost'
-import { CumtomRequesetHandler } from "./interface/express";
+import { apiUploadImage } from "./api/posts/apiUploadImage";
+
 const app = express();
 
 // POST 请求中间件
 import bodyParser from "body-parser";
+
 
 // 配置解析 application/x-www-form-urlencoded 数据
 app.use(bodyParser.urlencoded({ extended: false}));
@@ -54,6 +58,9 @@ app.delete("/posts/:id", apiDeletePost);
 
 // 更新某条数据
 app.put("/posts/:id", apiUpdatePost);
+
+// 上传图片
+app.post("/posts/:id/img", apiUploadImage);
 
 app.listen(port, () => {
     console.log(`http://127.0.0.1:${port} 启动成功了`);
