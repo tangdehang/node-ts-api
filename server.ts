@@ -10,6 +10,11 @@ import { apiDeletePost } from './api/posts/apiDeletePost'
 import { apiUpdatePost } from './api/posts/apiUpdatePost'
 import { apiUploadImage } from "./api/posts/apiUploadImage";
 
+
+// 处理错误中间件
+import { apiErrorHandler } from "./api/posts/genera/errprHandling";
+
+
 const app = express();
 
 // POST 请求中间件
@@ -61,6 +66,10 @@ app.put("/posts/:id", apiUpdatePost);
 
 // 上传图片
 app.post("/posts/:id/img", apiUploadImage);
+
+
+// 处理错误信息
+app.use(apiErrorHandler);
 
 app.listen(port, () => {
     console.log(`http://127.0.0.1:${port} 启动成功了`);

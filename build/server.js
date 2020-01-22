@@ -11,6 +11,8 @@ const apiCreatePost_1 = require("./api/posts/apiCreatePost");
 const apiDeletePost_1 = require("./api/posts/apiDeletePost");
 const apiUpdatePost_1 = require("./api/posts/apiUpdatePost");
 const apiUploadImage_1 = require("./api/posts/apiUploadImage");
+// 处理错误中间件
+const errprHandling_1 = require("./api/posts/genera/errprHandling");
 const app = express_1.default();
 // POST 请求中间件
 const body_parser_1 = __importDefault(require("body-parser"));
@@ -48,6 +50,8 @@ app.delete("/posts/:id", apiDeletePost_1.apiDeletePost);
 app.put("/posts/:id", apiUpdatePost_1.apiUpdatePost);
 // 上传图片
 app.post("/posts/:id/img", apiUploadImage_1.apiUploadImage);
+// 处理错误信息
+app.use(errprHandling_1.apiErrorHandler);
 app.listen(port, () => {
     console.log(`http://127.0.0.1:${port} 启动成功了`);
 });
